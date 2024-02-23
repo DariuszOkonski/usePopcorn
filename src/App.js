@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import NavBar from './NavBar';
 import Main from './Main';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Search from './Search';
 import NumResults from './NumResults';
 import Box from './Box';
@@ -57,8 +57,14 @@ const tempWatchedData = [
 ];
 
 export default function App() {
-  const [movies, setMovies] = useState(tempMovieData);
-  const [watched, setWatched] = useState(tempWatchedData);
+  const [movies, setMovies] = useState([]);
+  const [watched, setWatched] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://www.omdbapi.com/?apikey=39d44eb9&s=interstellar`)
+      .then((res) => res.json())
+      .then((data) => setMovies(data.Search));
+  }, []);
 
   return (
     <>
