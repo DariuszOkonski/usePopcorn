@@ -61,14 +61,33 @@ const tempWatchedData = [
 const KEY = '39d44eb9&s';
 
 export default function App() {
+  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const query = 'interstellar';
+  const tempQuery = 'interstellar';
+
+  // useEffect(function () {
+  //   console.log('After initial render');
+  // }, []);
+
+  // useEffect(function () {
+  //   console.log('After every render');
+  // });
+
+  // console.log('During render');
+
+  // useEffect(
+  //   function () {
+  //     console.log('D');
+  //   },
+  //   [query]
+  // );
 
   useEffect(() => {
     async function fetchMovies() {
+      setError(false);
       try {
         setIsLoading(true);
 
@@ -86,19 +105,24 @@ export default function App() {
         }
         setMovies(data.Search);
       } catch (err) {
-        console.error(err.message);
         setError(err.message);
       } finally {
         setIsLoading(false);
       }
     }
+
+    if (query.length < 3) {
+      setMovies([]);
+      setError('');
+      return;
+    }
     fetchMovies();
-  }, []);
+  }, [query]);
 
   return (
     <>
       <NavBar>
-        <Search />
+        <Search query={query} setQuery={setQuery} />
         <NumResults movies={movies} />
       </NavBar>
 
