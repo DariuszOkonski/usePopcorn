@@ -62,7 +62,7 @@ const tempWatchedData = [
 const KEY = '39d44eb9&s';
 
 export default function App() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState('interstellar');
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -84,7 +84,7 @@ export default function App() {
         setIsLoading(true);
 
         const res = await fetch(
-          `https://www.omdbapi.com/?apikey=${KEY}=${query}`
+          `https://www.omdbapi.com/?apikey=${KEY}&s=${query}`
         );
 
         if (!res.ok) {
