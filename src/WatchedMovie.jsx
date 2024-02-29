@@ -1,8 +1,6 @@
 import React from 'react';
 
 function WatchedMovie({ movie, onDeleteWatched }) {
-  // console.log(movie);
-
   return (
     <li>
       <img src={movie.poster} alt={`${movie.title} poster`} />
