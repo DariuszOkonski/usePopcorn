@@ -45,7 +45,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     function callback(e) {
       if (e.code === 'Escape') {
         onCloseMovie();
-        console.log('closing');
       }
     }
     document.addEventListener('keydown', callback);
@@ -75,7 +74,6 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 
     return () => {
       document.title = 'usePopcorn';
-      console.log(`Clean up effect for movie ${title}`);
     };
   }, [title]);
 
